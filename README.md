@@ -39,59 +39,43 @@ Display a message indicating that the user data has been saved to the file.
 
 ```
 using System;
-using System.IO;
 
-struct UserData
+struct student
 {
-    public string Name;
-    public int Age;
-    public string Email;
-}
+    public string name;
+
+    public int age;
+
+    public int marks;
+};
 
 class Program
 {
     static void Main(string[] args)
-
     {
-        string filePath = @"C:\Users\SEC\Desktop\exp10.txt";
-        UserData[] ud=new UserData[3];
-        for(int i=0; i<3;i++)
+        student[] s  = new student[5];
+        for (int i=0; i < 5; i++)
         {
-            Console.WriteLine("Enter your name:");
-            ud[i].Name = Console.ReadLine();
-
-            Console.WriteLine("Enter your age:");
-            ud[i].Age = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Enter your email:");
-            ud[i].Email = Console.ReadLine();
-
-            WriteUserDataToFile(filePath, ud[i]);
-        }  
-        
-        
-
-       
-
-        Console.WriteLine("User data has been saved to the file.");
-    }
-
-    static void WriteUserDataToFile(string filePath, UserData userData)
-    {
-        //using (FileStream fs = new FileStream(filePath, FileMode.Create))
-        using (StreamWriter writer = File.AppendText(filePath))
-        {
-            
-            writer.WriteLine($"Name: {userData.Name}");
-            writer.WriteLine($"Age: {userData.Age}");
-            writer.WriteLine($"Email: {userData.Email}");
-            
+            s[i].name = Console.ReadLine();
+            s[i].age = Convert.ToInt32(Console.ReadLine());
+            s[i].marks = Convert.ToInt32(Console.ReadLine());
         }
+        string path = @"C:\studentInfo.txt";
+        using (StreamWriter sw = File.AppendText(path))
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                sw.WriteLine(s[i].name + " " + s[i].age + " " + s[i].marks);
+            }
+        }
+        Console.WriteLine(File.ReadAllText(path));
     }
 }
 ```
 
 ## OUTPUT :
+
+![Screenshot 2024-05-09 195711](https://github.com/Abrinnisha6/19AI308-Object-Oriented-Programming-using-CSharp-Exp-10-File-Manipulation/assets/118889454/764c8bbb-4f6e-430b-a503-71deb20f2781)
 
 
 
